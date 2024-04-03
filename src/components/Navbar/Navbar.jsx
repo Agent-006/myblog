@@ -19,7 +19,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export default function Navbar() {
   return (
     <nav className="sticky flex justify-between items-center h-14 w-full px-5 py-2 border-b-[1px] border-slate-500">
-      <div className="logo font-bold">My Blogx</div>
+      <Link href={"/"} className="logo font-bold">
+        My Blogx
+      </Link>
       {/* TODO: may add gradient text*/}
       <div className="profile">
         <DropdownMenu>

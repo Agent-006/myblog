@@ -6,8 +6,8 @@ import Link from "next/link";
 export default function PostCard() {
   return (
     <Link
-      href={"#"}
-      className="bg-slate-900 w-64 h-80 rounded-md overflow-hidden"
+      href={"/post"}
+      className="bg-slate-900 w-64 h-96 rounded-md overflow-hidden"
     >
       <div className="w-full h-4/6 flex justify-center">
         <Image
