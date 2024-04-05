@@ -9,7 +9,7 @@ export default function Rightbar() {
         <Filters />
       </div>
       <div className="flex flex-col gap-2 w-full">
-        pata nahi kuch to hoga yaha
+        {/* TODO: future, recommended accounts */}
       </div>
     </div>
   );

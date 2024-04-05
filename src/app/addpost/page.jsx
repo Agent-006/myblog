@@ -31,13 +31,12 @@ export default function AddPostPage() {
                   />
                   <Input label="Title:" description="Enter your post title" />
                   <Input label="Tag:" description="Enter the genre" />
-                  {/* TODO: Textarea  */}
                   <TextArea
                     label="Content:"
                     description="Write your content here"
                   />
                 </div>
-                <Button type="submit" variant="wiz" size="lg">
+                <Button className="mb-5" type="submit">
                   Post
                 </Button>
               </form>

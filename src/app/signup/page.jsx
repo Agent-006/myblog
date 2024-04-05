@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Input, TextArea } from "@/components";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
@@ -36,6 +37,12 @@ export default function SignupPage() {
               <Button type="submit" size="lg">
                 Sign in
               </Button>
+              <p className="py-5 text-slate-200">
+                already have an account ?{" "}
+                <Link className="text-slate-500" href="/login">
+                  Login
+                </Link>
+              </p>
             </form>
           </div>
         </div>

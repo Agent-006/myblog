@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Input } from "@/components";
 import { Button } from "@/components/ui/button";
 import React from "react";
@@ -26,6 +27,12 @@ export default function LoginPage() {
                 <Button type="submit" size="lg">
                   Login
                 </Button>
+                <p className="py-5 text-slate-200">
+                  Don't have an account ?{" "}
+                  <Link className="text-slate-500" href="/signup">
+                    Signup
+                  </Link>
+                </p>
               </form>
             </div>
           </div>
