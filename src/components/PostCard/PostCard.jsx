@@ -15,6 +15,7 @@ export default function PostCard() {
           width={256}
           height={200}
           src={"/assets/image/pexels-amaan-shaikh-19946465.jpg"}
+          alt="Blog Image"
         />
       </div>
       <div className="h-1/6 flex items-center justify-start p-2 border-b-[.5px] border-slate-500 gap-1 mx-1">

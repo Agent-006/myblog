@@ -11,16 +11,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={inter.className}>
-        <main className="relative min-h-screen flex flex-col w-full bg-slate-950 text-white">
-          <Navbar />
-          <div className="w-full min-h-[89vh] flex items-center justify-center lg:items-stretch md:items-stretch">
-            <div className="w-2/12 hidden lg:block md:block">
-              <Leftbar />
-            </div>
-            {children}
-          </div>
+        <main className="relative min-h-screen flex flex-col w-full dark:bg-slate-950  dark:text-slate-200 bg-slate-200 text-slate-950">
+          {children}
         </main>
       </body>
     </html>
