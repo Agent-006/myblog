@@ -28,7 +28,7 @@ export default function LoginPage() {
                   Login
                 </Button>
                 <p className="py-5 text-slate-200">
-                  Don't have an account ?{" "}
+                  Don&apos;t have an account ?{" "}
                   <Link className="text-slate-500" href="/signup">
                     Signup
                   </Link>
