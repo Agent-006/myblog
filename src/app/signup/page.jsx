@@ -38,7 +38,7 @@ export default function SignupPage() {
                 Sign in
               </Button>
               <p className="py-5 text-slate-200">
-                already have an account ?{" "}
+                Already have an account ?{" "}
                 <Link className="text-slate-500" href="/login">
                   Login
                 </Link>

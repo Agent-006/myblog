@@ -16,6 +16,7 @@ export default function PostPage() {
                 width={400}
                 height={720}
                 src={"/assets/image/pexels-amaan-shaikh-19946465.jpg"}
+                alt="post image"
               />
             </div>
             <div className="w-full flex flex-col items-start justify-center bg-slate-800/50 backdrop-blur-md rounded-lg px-5 py-3">
