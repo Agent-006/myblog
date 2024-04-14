@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const userSchema = new Schema(
   {
-    fullName: {
+    fullname: {
       type: String,
       required: [true, "Please provide a fullname"],
     },
@@ -42,8 +42,6 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Post",
     },
-    forgotPasswordToken: String,
-    forgotPasswordTokenExpiry: Date,
     verifyToken: String,
     verifyTokenExpiry: Date,
   },

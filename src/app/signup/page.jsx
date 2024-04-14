@@ -4,10 +4,33 @@ import Link from "next/link";
 import { Input, TextArea } from "@/components";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { login } from "@/store/authSlice";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function SignupPage() {
-  const handelSubmit = () => {};
+  const [error, setError] = useState("");
+
+  const { register, handleSubmit } = useForm();
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const signUp = async (data) => {
+    try {
+      setError("");
+      
+      const res = await axios.post("/api/users/signup", data);
+      dispatch(login(res.data));
+
+      router.push("/login");
+    } catch (error) {
+      console.error("Sign up failed", error.message);
+      setError(error.message);
+    }
+  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center">
@@ -16,26 +39,57 @@ export default function SignupPage() {
           <h1 className="text-2xl font-semibold pb-5">Sign up</h1>
           <div className="w-full">
             <form
-              onSubmit={handelSubmit}
+              onSubmit={handleSubmit(signUp)}
               className="w-full h-full flex flex-col items-center justify-center"
             >
               <div className="pb-5 flex flex-col items-center justify-center">
                 <div className="w-full flex flex-col lg:flex-row lg:gap-2 md:gap-2">
-                  <Input label="fullname" description="Enter your fullname" />
-                  <Input label="username" description="Enter your username" />
+                  <Input
+                    type="text"
+                    label="fullname"
+                    description="Enter your fullname"
+                    {...register("fullname", {
+                      required: true,
+                    })}
+                  />
+                  <Input
+                    type="text"
+                    label="username"
+                    description="Enter your username"
+                    {...register("username", {
+                      required: true,
+                    })}
+                  />
                 </div>
                 <div className="w-full flex flex-col lg:flex-row lg:gap-2 md:gap-2">
-                  <Input label="email" description="Enter your email address" />
-                  <Input label="password" description="Enter your password" />
+                  <Input
+                    type="email"
+                    label="email"
+                    description="Enter your email address"
+                    {...register("email", {
+                      required: true,
+                    })}
+                  />
+                  <Input
+                    type="password"
+                    label="password"
+                    description="Enter your password"
+                    {...register("password", {
+                      required: true,
+                    })}
+                  />
                 </div>
                 <TextArea
                   rows="2"
                   label="bio"
                   description="Set a profile bio"
+                  {...register("bio", {
+                    required: true,
+                  })}
                 />
               </div>
               <Button type="submit" size="lg">
-                Sign in
+                Sign up
               </Button>
               <p className="py-5 text-slate-200">
                 Already have an account ?{" "}

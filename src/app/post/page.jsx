@@ -7,7 +7,7 @@ export default function PostPage() {
   return (
     <>
       <Navbar />
-      <div className="w-full min-h-[89vh] flex items-center justify-center lg:items-stretch md:items-stretch py-10">
+      <div className="w-full min-h-[89vh] flex items-center justify-center lg:items-stretch md:items-stretch">
         <ScrollArea className="h-[calc(100vh-56px)] w-full flex items-center justify-center">
           <div className="flex flex-col justify-center items-center gap-1 p-4">
             <div className="w-full flex items-center justify-center bg-slate-800 rounded-lg overflow-hidden">

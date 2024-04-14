@@ -30,6 +30,7 @@ function TextArea(
         id={id}
         cols={cols}
         rows={rows}
+        ref={ref}
         {...props}
       />
       <p className="text-sm text-slate-400 p-2">{description}</p>

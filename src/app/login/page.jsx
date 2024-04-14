@@ -3,10 +3,28 @@
 import Link from "next/link";
 import { Input } from "@/components";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function LoginPage() {
-  const handelSubmit = () => {};
+  const { register, handleSubmit } = useForm();
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const onLogin = async (data) => {
+    try {
+      setError("");
+      console.log(data);
+      const res = await axios.post("/api/users/login", data);
+      console.log(res);
+      router.push("/");
+    } catch (error) {
+      console.error("Login failed", error);
+      setError(error.message);
+    }
+  };
 
   return (
     <div>
@@ -16,13 +34,34 @@ export default function LoginPage() {
             <h1 className="text-2xl font-semibold pb-5">Login</h1>
             <div className="w-full">
               <form
-                onSubmit={handelSubmit}
+                onSubmit={handleSubmit(onLogin)}
                 className="w-full h-full flex flex-col items-center justify-center"
               >
                 <div className="pb-5 flex flex-col items-center justify-center">
-                  <Input label="username" description="Enter your username" />
-                  <Input label="email" description="Enter your email address" />
-                  <Input label="password" description="Enter your password" />
+                  <Input
+                    type="text"
+                    label="username"
+                    description="Enter your username"
+                    {...register("username", {
+                      required: true,
+                    })}
+                  />
+                  <Input
+                    type="email"
+                    label="email"
+                    description="Enter your email address"
+                    {...register("email", {
+                      required: true,
+                    })}
+                  />
+                  <Input
+                    type="password"
+                    label="password"
+                    description="Enter your password"
+                    {...register("password", {
+                      required: true,
+                    })}
+                  />
                 </div>
                 <Button type="submit" size="lg">
                   Login
