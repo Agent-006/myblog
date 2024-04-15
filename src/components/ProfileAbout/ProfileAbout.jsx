@@ -11,7 +11,7 @@ export default function ProfileAbout() {
     (async () => {
       try {
         setError(false);
-        const response = await axios.get("/api/users/profile");
+        const response = await axios.post("/api/users/profile");
         const data = response.data.data;
         setUserData(data);
       } catch (error) {
