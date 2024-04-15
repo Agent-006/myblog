@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 
@@ -15,8 +17,21 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const router = useRouter();
+
+  const logout = async () => {
+    try {
+      await axios.post("/api/users/logout");
+      router.push("/login");
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
     <nav className="sticky flex justify-between items-center h-14 w-full px-5 py-2 border-b-[1px] border-slate-500">
       <Link href={"/"} className="logo font-bold">
@@ -72,7 +87,10 @@ export default function Navbar() {
               </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="focus:bg-slate-700 focus:text-slate-200">
+            <DropdownMenuItem
+              onClick={logout}
+              className="focus:bg-slate-700 focus:text-slate-200"
+            >
               <LogOut className="mr-2 h-4 w-4" />
               <span>Log out</span>
               <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>

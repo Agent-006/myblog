@@ -9,7 +9,6 @@ export async function POST(request) {
   try {
     const reqBody = await request.json();
     const { fullname, username, email, password, bio } = reqBody;
-
     if (!fullname || !username || !email || !password || !bio) {
       return Response.json(
         {
@@ -26,7 +25,6 @@ export async function POST(request) {
       username,
       email,
     });
-
     if (user) {
       return Response.json(
         {
@@ -39,9 +37,9 @@ export async function POST(request) {
         }
       );
     }
+    console.log("1");
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = new User({
       fullname,
       username,
@@ -51,8 +49,8 @@ export async function POST(request) {
     });
 
     const savedUser = await newUser.save();
-
     // send verification email
+
     await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
 
     return Response.json(

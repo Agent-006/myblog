@@ -21,7 +21,7 @@ export default function SignupPage() {
   const signUp = async (data) => {
     try {
       setError("");
-      
+
       const res = await axios.post("/api/users/signup", data);
       dispatch(login(res.data));
 

@@ -26,9 +26,7 @@ export default function VerifyEmailPage() {
   const verifyUserEmail = async (data) => {
     try {
       setError(false);
-      console.log(data);
       const res = await axios.post("/api/users/verifyemail", { data });
-      console.log(res.data);
       setVerified(true);
     } catch (err) {
       setError(true);
@@ -45,7 +43,7 @@ export default function VerifyEmailPage() {
       setError(true);
       console.log(err.message);
     }
-  });
+  }, [setToken, setVerified]);
 
   return (
     <div className="w-full h-screen flex items-center justify-center">

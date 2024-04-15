@@ -1,9 +1,24 @@
+"use client";
+
 import React from "react";
 
 import Link from "next/link";
 import { Home, Plus, Users, User, LogOut, Settings } from "lucide-react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function Leftbar() {
+  const router = useRouter();
+
+  const logout = async () => {
+    try {
+      await axios.post("/api/users/logout");
+      router.push("/login");
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
     <div className="border-r-[1px] border-slate-500 w-full h-full flex flex-col justify-between py-10 px-3">
       <div className="flex flex-col gap-2 w-full">
@@ -34,6 +49,7 @@ export default function Leftbar() {
       </div>
       <div className="flex flex-col gap-2 w-full">
         <Link
+          onClick={logout}
           className="bg-slate-900 py-2 px-3 rounded-md flex items-center justify-start gap-1 text-sm hover:bg-slate-700 duration-300"
           href={"#"}
         >
