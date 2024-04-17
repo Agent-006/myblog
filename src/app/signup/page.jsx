@@ -10,25 +10,37 @@ import { useDispatch } from "react-redux";
 import { login } from "@/store/authSlice";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { Loader2 } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function SignupPage() {
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const { register, handleSubmit } = useForm();
   const router = useRouter();
   const dispatch = useDispatch();
+  const { toast } = useToast();
 
   const signUp = async (data) => {
     try {
       setError("");
-
+      setIsLoading(true);
       const res = await axios.post("/api/users/signup", data);
       dispatch(login(res.data));
-
+      toast({
+        title: "Verfication Mail Sent !",
+        description: "Verfication mail has been send, please verify you email",
+      });
+      setIsLoading(false);
       router.push("/login");
     } catch (error) {
-      console.error("Sign up failed", error.message);
-      setError(error.message);
+      console.error("Sign up failed", err.message);
+      setError(err.message);
+      toast({
+        title: "Error",
+        description: error,
+      });
     }
   };
 
@@ -88,9 +100,16 @@ export default function SignupPage() {
                   })}
                 />
               </div>
-              <Button type="submit" size="lg">
-                Sign up
-              </Button>
+              {isLoading ? (
+                <Button type="submit" size="lg">
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Sign up
+                </Button>
+              ) : (
+                <Button type="submit" size="lg">
+                  Sign up
+                </Button>
+              )}
               <p className="py-5 text-slate-200">
                 Already have an account ?{" "}
                 <Link className="text-slate-500" href="/login">

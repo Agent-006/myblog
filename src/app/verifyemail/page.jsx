@@ -13,25 +13,38 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import dynamic from "next/dynamic";
 import { Input } from "@/components";
 import { useForm } from "react-hook-form";
+import { Loader2 } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function VerifyEmailPage() {
   const [token, setToken] = useState("");
   const [verified, setVerified] = useState(false);
   const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
   const { register, handleSubmit } = useForm();
 
   const verifyUserEmail = async (data) => {
     try {
       setError(false);
+      setIsLoading(true);
       const res = await axios.post("/api/users/verifyemail", { data });
       console.log(res);
+      toast({
+        description: "Successfully verified !",
+      });
+      setIsLoading(false);
       setVerified(true);
     } catch (err) {
       setError(true);
       console.log(err.message);
+      toast({
+        title: "Something went wrong !",
+        description: error,
+      });
     }
   };
 
@@ -79,7 +92,18 @@ export default function VerifyEmailPage() {
                     <Link href="/login">Go to login</Link>
                   </Button>
                 ) : (
-                  <Button type="submit">Verify</Button>
+                  <>
+                    {isLoading ? (
+                      <Button type="submit" size="lg">
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Verify
+                      </Button>
+                    ) : (
+                      <Button type="submit" size="lg">
+                        Verify
+                      </Button>
+                    )}
+                  </>
                 )}
               </CardFooter>
             </form>

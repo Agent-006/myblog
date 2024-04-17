@@ -2,7 +2,7 @@
 
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
-import { Leftbar, Navbar } from "@/components";
+import { Toaster } from "@/components/ui/toaster"
 import { Provider } from "react-redux";
 import store from "@/store/store";
 
@@ -17,6 +17,7 @@ export default function RootLayout({ children }) {
           <main className="relative min-h-screen flex flex-col w-full dark:bg-slate-950  dark:text-slate-200 bg-slate-200 text-slate-950">
             {children}
           </main>
+          <Toaster />
         </body>
       </html>
     </Provider>
