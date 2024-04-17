@@ -27,7 +27,7 @@ export default function VerifyEmailPage() {
     try {
       setError(false);
       const res = await axios.post("/api/users/verifyemail", { data });
-      console.log(res)
+      console.log(res);
       setVerified(true);
     } catch (err) {
       setError(true);
@@ -39,7 +39,8 @@ export default function VerifyEmailPage() {
     try {
       setError(false);
       const urlToken = window.location.search.split("=")[1];
-      setToken(urlToken || "");
+      const decodedToken = decodeURIComponent(urlToken);
+      setToken(decodedToken || "");
     } catch (err) {
       setError(true);
       console.log(err.message);
