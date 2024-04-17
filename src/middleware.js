@@ -26,9 +26,7 @@ export const config = {
     "/verifyemail",
     "/post",
     "/addpost",
-    "/settings",
-    "/settings/editpassword",
-    "/settings/editdetails",
+    "/settings/:path*",
     "/groups",
   ],
 };
