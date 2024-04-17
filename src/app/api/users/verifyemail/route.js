@@ -21,8 +21,10 @@ export async function POST(request) {
       );
     }
 
+    const decodedURIToken = decodeURIComponent(token)
+    
     const user = await User.findOne({
-      verifyToken: token,
+      verifyToken: decodedURIToken,
       verifyTokenExpiry: { $gt: Date.now() },
     });
 

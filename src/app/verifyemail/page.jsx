@@ -27,6 +27,7 @@ export default function VerifyEmailPage() {
     try {
       setError(false);
       const res = await axios.post("/api/users/verifyemail", { data });
+      console.log(res)
       setVerified(true);
     } catch (err) {
       setError(true);
