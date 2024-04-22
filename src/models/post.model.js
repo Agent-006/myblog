@@ -6,9 +6,9 @@ const postSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    image: {
+    imageFile: {
       type: String, // cloudinary url
-      required: [ture, "Please provide an image"],
+      default: "",
     },
     title: {
       type: String,
@@ -20,7 +20,7 @@ const postSchema = new Schema(
     },
     category: {
       type: String,
-      required: [ture, "Please provide a category"],
+      required: [true, "Please provide a category"],
     },
   },
   { timestamps: true }

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { LogOut, Plus, Settings, User, Users, Home } from "lucide-react";
@@ -19,8 +19,29 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { login } from "@/store/authSlice";
 
 export default function Navbar() {
+  const [userData, setUserData] = useState("");
+  const [error, setError] = useState(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setError(false);
+        const response = await axios.post("/api/users/profile");
+        const userData = response.data.data;
+        setUserData(userData);
+        if (userData) dispatch(login({ userData }));
+      } catch (error) {
+        console.error(error.message);
+      }
+    })();
+  }, [dispatch, setUserData]);
+
   const router = useRouter();
 
   const logout = async () => {
@@ -50,7 +71,7 @@ export default function Navbar() {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <Link href={"/profile"}>
+              <Link href={`/profile/id=${userData._id}`}>
                 <DropdownMenuItem className="focus:bg-slate-700 focus:text-slate-200">
                   <User className="mr-2 h-4 w-4" />
                   <span>Profile</span>

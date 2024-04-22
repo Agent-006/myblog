@@ -6,8 +6,10 @@ import Link from "next/link";
 import { Home, Plus, Users, User, LogOut, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export default function Leftbar() {
+  const userData = useSelector((state) => state.auth.userData);
   const router = useRouter();
 
   const logout = async () => {
@@ -42,7 +44,7 @@ export default function Leftbar() {
         </Link>
         <Link
           className="bg-slate-900 py-2 px-3 rounded-md flex items-center justify-start gap-1 text-sm hover:bg-slate-700 duration-300"
-          href={"/profile"}
+          href={`/profile/id=${userData?._id}`}
         >
           <User width={15} /> Profile
         </Link>

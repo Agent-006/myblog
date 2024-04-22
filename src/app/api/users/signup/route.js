@@ -3,7 +3,7 @@ import User from "@/models/user.model";
 import bcrypt from "bcryptjs";
 import { sendEmail } from "@/helpers/mailer";
 
-connectDB();
+await connectDB();
 
 export async function POST(request) {
   try {

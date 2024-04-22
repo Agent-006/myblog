@@ -41,6 +41,7 @@ export default function VerifyEmailPage() {
     } catch (err) {
       setError(true);
       console.log(err.message);
+      setIsLoading(false);
       toast({
         title: "Something went wrong !",
         description: error,

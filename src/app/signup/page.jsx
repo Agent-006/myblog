@@ -37,6 +37,7 @@ export default function SignupPage() {
     } catch (error) {
       console.error("Sign up failed", err.message);
       setError(err.message);
+      setIsLoading(false);
       toast({
         title: "Error",
         description: error,

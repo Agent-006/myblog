@@ -1,9 +1,22 @@
+"use client";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Navbar } from "@/components";
+import axios from "axios";
 
 export default function PostPage() {
+  const [post, setPost] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const postId = window.location.search.split("=")[1];
+      const response = await axios.post(`/api/post/getpost?postId=${postId}`);
+      setPost(response.data.data);
+    })();
+  }, [setPost]);
+
   return (
     <>
       <Navbar />
@@ -15,51 +28,35 @@ export default function PostPage() {
                 objectFit="contain"
                 width={400}
                 height={720}
-                src={"/assets/image/pexels-amaan-shaikh-19946465.jpg"}
+                src={
+                  post.imageFile
+                    ? post.imageFile
+                    : "/assets/image/pexels-amaan-shaikh-19946465.jpg"
+                }
                 alt="post image"
               />
             </div>
             <div className="w-full flex flex-col items-start justify-center bg-slate-800/50 backdrop-blur-md rounded-lg px-5 py-3">
               <div>
-                <span className="font-semibold text-xl">Title: </span>
-                <span className="font-light text-lg">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Tenetur, recusandae!
-                </span>
+                {/* <span className="font-semibold text-xl">Title: </span> */}
+                <span className="font-semibold text-xl">{post?.title}</span>
               </div>
               <div>
                 <span className="text-sm text-slate-400 font-semibold">
                   Author:
                 </span>
 
-                <span className="font-light text-base"> Agent_006</span>
+                <span className="font-light text-base">
+                  {" "}
+                  {post?.author?.username}
+                </span>
               </div>
             </div>
             <div className="w-full flex flex-col items-start justify-center bg-slate-800/50 backdrop-blur-md rounded-lg px-5 py-3">
-              <p className="font-light ">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima
-                obcaecati animi in autem ab esse explicabo eligendi perspiciatis
-                consectetur amet, voluptas, magnam debitis praesentium? Nemo
-                quia sunt et veniam eius maxime cum laboriosam velit minima sit,
-                odit saepe quos ut consectetur, fugiat dolorum soluta debitis
-                exercitationem maiores ad voluptates. Vero dolore deserunt
-                dignissimos facilis perspiciatis voluptatum similique voluptates
-                assumenda rem, cumque, itaque recusandae sapiente tempore
-                quibusdam voluptatem at reprehenderit est, ducimus dolores iusto
-                voluptas ratione labore consequatur! Mollitia vitae, quasi, modi
-                quaerat reiciendis commodi quidem eaque illum explicabo
-                similique sequi quas provident iure enim adipisci maiores hic
-                esse magni, rerum numquam ipsa consequatur quos inventore. Error
-                fuga aperiam cupiditate quas minus libero. Minus deserunt ipsam
-                suscipit unde, ad nobis libero debitis deleniti soluta expedita
-                possimus veritatis illum officiis sint recusandae? Sint vel
-                itaque beatae ipsam reiciendis eos consectetur veritatis ea id
-                possimus quisquam sequi, dolorem eius recusandae iste quibusdam
-                accusantium.
-              </p>
+              <p className="font-light ">{post?.content}</p>
             </div>
             <div className="w-full flex flex-col items-start justify-center bg-slate-800/50 backdrop-blur-md rounded-lg px-5 py-3">
-              tag
+              Tag: {post?.category}
             </div>
           </div>
         </ScrollArea>

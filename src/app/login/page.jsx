@@ -30,8 +30,9 @@ export default function LoginPage() {
     } catch (err) {
       console.error("Login failed", err);
       setError(err.message);
+      setIsLoading(false);
       toast({
-        title: "Something went wrong !",
+        title: "User not found please sign up !",
         description: error,
       });
     }

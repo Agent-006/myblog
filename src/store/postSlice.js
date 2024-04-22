@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  postData: [],
+  allPostData: [],
+  userPostData: [],
 };
 
 const postSlice = createSlice({
@@ -9,12 +10,15 @@ const postSlice = createSlice({
   initialState,
   reducers: {
     //TODO: kuch hoga yaha
-    post: (state, action) => {
-      state.postData = state.action.postData;
+    allPosts: (state, action) => {
+      state.allPostData = state.action.allPostData;
+    },
+    userPosts: (state, action) => {
+      state.userPostData = state.action.userPostData;
     },
   },
 });
 
-export const { post } = postSlice.actions;
+export const { allPosts, userPosts } = postSlice.actions;
 
 export default postSlice.reducer;

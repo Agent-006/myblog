@@ -1,8 +1,20 @@
-import { Rightbar, PostCard, Filters, Navbar, Leftbar } from "@/components";
+"use client";
 
+import { Rightbar, PostCard, Filters, Navbar, Leftbar } from "@/components";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await axios.post("/api/post/getallposts");
+      setPost(response.data.data);
+    })();
+  }, [setPost]);
+
   return (
     <>
       <Navbar />
@@ -20,11 +32,9 @@ export default function Home() {
                 All Blogs
               </h4>
               <div className="flex flex-wrap items-center justify-center gap-4">
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
+                {post.map((post) => (
+                  <PostCard key={post._id} {...post} />
+                ))}
               </div>
             </div>
           </ScrollArea>

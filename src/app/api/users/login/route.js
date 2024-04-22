@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
-connectDB();
+await connectDB();
 
 export async function POST(request) {
   try {
